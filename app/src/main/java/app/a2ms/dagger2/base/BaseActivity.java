@@ -6,12 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.UUID;
 
+import javax.inject.Inject;
+
 import app.a2ms.dagger2.di.Injector;
+import app.a2ms.dagger2.di.ScreenInjector;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static String INSTANCE_ID_KEY = "instance_id";
     private String instanceId;
+    @Inject
+    ScreenInjector screenInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +43,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (isFinishing()) {
-            Injector.clearComponent();
+            Injector.clearComponent(this);
         }
+    }
+
+    public ScreenInjector getScreenInjector() {
+        return screenInjector;
     }
 }

@@ -1,7 +1,8 @@
-package app.a2ms.dagger2
+package app.a2ms.dagger2.home
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import app.a2ms.dagger2.R
 
 class MainActivity : AppCompatActivity() {
 

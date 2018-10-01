@@ -13,5 +13,6 @@ public class MyApplication extends Application {
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
+        //next creating activity scope
     }
 }

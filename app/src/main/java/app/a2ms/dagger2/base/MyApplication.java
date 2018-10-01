@@ -2,9 +2,16 @@ package app.a2ms.dagger2.base;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
+import app.a2ms.dagger2.di.ActivityInjector;
+
 public class MyApplication extends Application {
     //make a field for {@ApplicationComponent}
     private ApplicationComponent component;
+    //Get the activityInjector
+    @Inject
+    ActivityInjector activityInjector;
 
     @Override
     public void onCreate() {
@@ -13,6 +20,10 @@ public class MyApplication extends Application {
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
-        //next creating activity scope
+        component.inject(this);
+    }
+
+    public ActivityInjector getActivityInjector() {
+        return activityInjector;
     }
 }

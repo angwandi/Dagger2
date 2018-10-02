@@ -34,6 +34,7 @@ dependencies {
     implementation "com.android.support:support-v4:$supportLibraryVersion"
     implementation "com.android.support:support-media-compat:$supportLibraryVersion"
     implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
 
     //Dagger 2 for injections
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -67,6 +68,12 @@ dependencies {
 
     //Timber for Logging errors
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //Butterknife for view binding
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    implementation "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

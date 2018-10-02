@@ -14,14 +14,15 @@ import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 @ScreenScope
-public class TrendingReposViewModel {
+class TrendingReposViewModel {
 
-    private final BehaviorRelay<List<Repo>> repoRelay = BehaviorRelay.create();
+    private final BehaviorRelay<List<Repo>> reposRelay = BehaviorRelay.create();
     private final BehaviorRelay<Integer> errorRelay = BehaviorRelay.create();
     private final BehaviorRelay<Boolean> loadingRelay = BehaviorRelay.create();
 
     @Inject
     TrendingReposViewModel() {
+
     }
 
     Observable<Boolean> loading() {
@@ -29,7 +30,7 @@ public class TrendingReposViewModel {
     }
 
     Observable<List<Repo>> repos() {
-        return repoRelay;
+        return reposRelay;
     }
 
     Observable<Integer> error() {
@@ -42,15 +43,14 @@ public class TrendingReposViewModel {
 
     Consumer<List<Repo>> reposUpdated() {
         errorRelay.accept(-1);
-        return repoRelay;
+        return reposRelay;
     }
 
     Consumer<Throwable> onError() {
         return throwable -> {
             Timber.e(throwable, "Error loading Repos");
-            errorRelay.accept(R.string.api_erro_repos);
+            errorRelay.accept(R.string.api_error_repos);
         };
     }
-
 
 }

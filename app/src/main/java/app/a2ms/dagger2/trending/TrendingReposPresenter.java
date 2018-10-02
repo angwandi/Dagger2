@@ -6,9 +6,10 @@ import javax.inject.Inject;
 
 import app.a2ms.dagger2.data.RepoRequester;
 import app.a2ms.dagger2.di.ScreenScope;
+import app.a2ms.dagger2.model.Repo;
 
 @ScreenScope
-class TrendingReposPresenter {
+class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
 
     private final TrendingReposViewModel viewModel;
     private final RepoRequester repoRequester;
@@ -32,4 +33,8 @@ class TrendingReposPresenter {
     }
 
 
+    @Override
+    public void onRepoClicked(Repo repo) {
+        //TODO to detail screen
+    }
 }

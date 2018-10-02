@@ -19,12 +19,15 @@ import javax.inject.Inject;
 import app.a2ms.dagger2.R;
 import app.a2ms.dagger2.di.Injector;
 import app.a2ms.dagger2.di.ScreenInjector;
+import app.a2ms.dagger2.ui.ScreenNavigator;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static String INSTANCE_ID_KEY = "instance_id";
     @Inject
     ScreenInjector screenInjector;
+    @Inject
+    ScreenNavigator screenNavigator;
 
     private String instanceId;
 
@@ -48,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
+        screenNavigator.initWithRouter(router, initialScreen());
         monitorBackStack();
     }
 
@@ -55,10 +59,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int layoutRes();
 
+    protected abstract Controller initialScreen();
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INSTANCE_ID_KEY, instanceId);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!screenNavigator.pop()) {
+            super.onBackPressed();
+        }
     }
 
     public String getInstanceId() {
@@ -68,6 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        screenNavigator.clear();
         if (isFinishing()) {
             Injector.clearComponent(this);
         }

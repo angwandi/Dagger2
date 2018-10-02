@@ -15,7 +15,7 @@ public abstract class Repo {
         return new AutoValue_Repo.MoshiJsonAdapter(moshi);
     }
 
-    public abstract long id();
+    public abstract Long id();
 
     public abstract String name();
 

@@ -30,22 +30,25 @@ dependencies {
     implementation "com.android.support:support-media-compat:$supportLibraryVersion"
     implementation "com.android.support:design:$supportLibraryVersion"
 
-//Dagger 2 for injections
+    //Dagger 2 for injections
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-//Retrofit for network requests
+    //Retrofit for network requests
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     annotationProcessor "com.ryanharter.auto.value:auto-value-moshi:$autoValueMoshiVersion"
     compileOnly "com.ryanharter.auto.value:auto-value-moshi-annotations:$autoValueMoshiVersion"
 
-//Auto values dependencies(no runtime dependencies)
+    //Auto values dependencies(no runtime dependencies)
     compileOnly "com.google.auto.value:auto-value:$autoValueVersion"
     annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
+
+    //Java time and date API
+    implementation "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
 
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"

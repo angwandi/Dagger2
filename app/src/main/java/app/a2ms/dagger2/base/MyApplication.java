@@ -4,7 +4,9 @@ import android.app.Application;
 
 import javax.inject.Inject;
 
+import app.a2ms.dagger2.BuildConfig;
 import app.a2ms.dagger2.di.ActivityInjector;
+import timber.log.Timber;
 
 public class MyApplication extends Application {
     //make a field for {@ApplicationComponent}
@@ -21,6 +23,10 @@ public class MyApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         component.inject(this);
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     public ActivityInjector getActivityInjector() {

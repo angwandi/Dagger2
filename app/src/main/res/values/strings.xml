@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dagger2</string>
+    <string name="api_erro_repos">Error Loading Repos</string>
 </resources>

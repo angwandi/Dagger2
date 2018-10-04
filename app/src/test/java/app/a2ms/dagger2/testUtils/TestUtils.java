@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import app.a2ms.dagger2.model.AdapterFactory;
 import app.a2ms.dagger2.model.ZoneDateTimeAdapter;
 
-class TestUtils {
+public class TestUtils {
 
     private static final Moshi TEST_MOSHI = initializeMoshi();
     private static TestUtils INSTANCE = new TestUtils();

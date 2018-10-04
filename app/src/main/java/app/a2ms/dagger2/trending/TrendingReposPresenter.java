@@ -15,10 +15,10 @@ class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
     private final RepoRequester repoRequester;
 
     @Inject
-    TrendingReposPresenter(TrendingReposViewModel trendingReposViewModel, RepoRequester repoRequester, TrendingReposViewModel viewModel, RepoRequester repoRequester1) {
+    TrendingReposPresenter(TrendingReposViewModel viewModel, RepoRequester repoRequester) {
 
         this.viewModel = viewModel;
-        this.repoRequester = repoRequester1;
+        this.repoRequester = repoRequester;
 
         loadRepos();
     }

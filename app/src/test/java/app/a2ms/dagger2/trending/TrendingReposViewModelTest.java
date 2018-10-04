@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import app.a2ms.dagger2.R;
 import app.a2ms.dagger2.data.TrendingReposResponse;
+import app.a2ms.dagger2.testUtils.TestUtils;
 import io.reactivex.observers.TestObserver;
 
 public class TrendingReposViewModelTest {

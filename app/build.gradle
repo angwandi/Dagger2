@@ -74,6 +74,8 @@ dependencies {
     implementation "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
+    //Mockito for testing
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

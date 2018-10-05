@@ -14,7 +14,7 @@ import dagger.multibindings.IntoMap;
 
 @Module(subcomponents = {
         TrendingReposComponent.class,
-        RepoDetailsController.class,
+        RepoDetailsComponent.class,
 })
 public abstract class MainScreenBindingModule {
 

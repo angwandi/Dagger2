@@ -13,6 +13,7 @@ import javax.inject.Provider;
 import app.a2ms.dagger2.model.Repo;
 import app.a2ms.dagger2.testUtils.TestUtils;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -40,7 +41,7 @@ public class RepoRepositoryTest {
         rxJavaRepo = trendingReposResponse.repos().get(0);
         otherRepo = trendingReposResponse.repos().get(1);
 
-        repository = new RepoRepository(repoRequesterProvider);
+        repository = new RepoRepository(repoRequesterProvider, Schedulers.trampoline());
 
 
     }
@@ -49,16 +50,19 @@ public class RepoRepositoryTest {
     public void getTrendingRepos() {
         repository.getTrendingRepos().test().assertValue(trendingReposResponse.repos());
 
+        //Create a different list and have the API call return that on subsequent calls
         List<Repo> modifiedList = new ArrayList<>(trendingReposResponse.repos());
         modifiedList.remove(0);
         when(repoRequester.getTrendingRepos()).thenReturn(Single.just(modifiedList));
 
+        //Verify that we still get tge cached list rather than the different API response
         repository.getTrendingRepos().test().assertValue(trendingReposResponse.repos());
     }
 
     @Test
     public void getRepo() {
 
+        //load the trending repos to mimic the most likely state of app
         repository.getTrendingRepos().subscribe();
 
         when(repoRequester.getRepo(anyString(), anyString())).thenReturn(Single.just(otherRepo));

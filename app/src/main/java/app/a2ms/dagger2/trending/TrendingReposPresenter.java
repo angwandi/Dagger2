@@ -7,18 +7,23 @@ import javax.inject.Inject;
 import app.a2ms.dagger2.data.RepoRepository;
 import app.a2ms.dagger2.di.ScreenScope;
 import app.a2ms.dagger2.model.Repo;
+import app.a2ms.dagger2.ui.ScreenNavigator;
 
 @ScreenScope
 class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
 
     private final TrendingReposViewModel viewModel;
     private final RepoRepository repoRepository;
+    private final ScreenNavigator screenNavigator;
 
     @Inject
-    TrendingReposPresenter(TrendingReposViewModel viewModel, RepoRepository repoRepository) {
+    TrendingReposPresenter(TrendingReposViewModel viewModel,
+                           RepoRepository repoRepository,
+                           ScreenNavigator screenNavigator) {
 
         this.viewModel = viewModel;
         this.repoRepository = repoRepository;
+        this.screenNavigator = screenNavigator;
 
         loadRepos();
     }
@@ -35,6 +40,6 @@ class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
 
     @Override
     public void onRepoClicked(Repo repo) {
-        //TODO to detail screen
+        screenNavigator.goToRepoDetails(repo.owner().login(), repo.name());
     }
 }

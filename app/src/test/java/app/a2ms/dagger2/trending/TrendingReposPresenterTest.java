@@ -14,6 +14,7 @@ import app.a2ms.dagger2.data.RepoRepository;
 import app.a2ms.dagger2.data.TrendingReposResponse;
 import app.a2ms.dagger2.model.Repo;
 import app.a2ms.dagger2.testUtils.TestUtils;
+import app.a2ms.dagger2.ui.ScreenNavigator;
 import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
 
@@ -33,6 +34,8 @@ public class TrendingReposPresenterTest {
     Consumer<List<Repo>> onSuccessConsumer;
     @Mock
     Consumer<Boolean> loadingConsumer;
+    @Mock
+    ScreenNavigator screenNavigator;
 
     private TrendingReposPresenter presenter;
 
@@ -86,7 +89,12 @@ public class TrendingReposPresenterTest {
 
     @Test
     public void onRepoClicked() {
-        //TODO
+        Repo repo = TestUtils.loadJson("mock/get_repo.json", Repo.class);
+        setUpSuccess();
+        initializePresenter();
+        presenter.onRepoClicked(repo);
+
+        verify(screenNavigator).goToRepoDetails(repo.owner().login(), repo.name());
     }
 
     private List<Repo> setUpSuccess() {
@@ -106,6 +114,6 @@ public class TrendingReposPresenterTest {
     }
 
     private void initializePresenter() {
-        presenter = new TrendingReposPresenter(viewModel, repoRepository);
+        presenter = new TrendingReposPresenter(viewModel, repoRepository, screenNavigator);
     }
 }

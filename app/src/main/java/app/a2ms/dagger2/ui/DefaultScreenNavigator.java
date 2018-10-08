@@ -39,7 +39,6 @@ public class DefaultScreenNavigator implements ScreenNavigator {
             router.pushController(RouterTransaction.with(RepoDetailsController.newInstance(repoName, repoOwner))
                     .pushChangeHandler(new FadeChangeHandler())
                     .popChangeHandler(new FadeChangeHandler()));
-
         }
     }
 

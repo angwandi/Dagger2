@@ -12,10 +12,10 @@ import app.a2ms.dagger2.model.Repo;
 @AutoValue
 public abstract class TrendingReposResponse {
 
+    @Json(name = "items")
+    public abstract List<Repo> repos();
+
     public static JsonAdapter<TrendingReposResponse> jsonAdapter(Moshi moshi) {
         return new AutoValue_TrendingReposResponse.MoshiJsonAdapter(moshi);
     }
-
-    @Json(name = "items")
-    public abstract List<Repo> repos();
 }

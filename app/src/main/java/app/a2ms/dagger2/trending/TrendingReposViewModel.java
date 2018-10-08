@@ -52,5 +52,4 @@ class TrendingReposViewModel {
             errorRelay.accept(R.string.api_error_repos);
         };
     }
-
 }

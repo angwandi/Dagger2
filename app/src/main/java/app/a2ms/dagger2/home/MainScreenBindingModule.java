@@ -21,12 +21,10 @@ public abstract class MainScreenBindingModule {
     @Binds
     @IntoMap
     @ControllerKey(TrendingReposController.class)
-    abstract AndroidInjector.Factory<? extends Controller> bindTrendingReposInjector(
-            TrendingReposComponent.Builder builder);
+    abstract AndroidInjector.Factory<? extends Controller> bindTrendingReposInjector(TrendingReposComponent.Builder builder);
 
     @Binds
     @IntoMap
     @ControllerKey(RepoDetailsController.class)
-    abstract AndroidInjector.Factory<? extends Controller> bindRepoDetailsInjector(
-            RepoDetailsComponent.Builder builder);
+    abstract AndroidInjector.Factory<? extends Controller> bindRepoDetailsInjector(RepoDetailsComponent.Builder builder);
 }

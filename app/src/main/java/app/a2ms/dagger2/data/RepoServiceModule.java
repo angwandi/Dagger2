@@ -1,5 +1,6 @@
 package app.a2ms.dagger2.data;
 
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 

@@ -7,12 +7,10 @@ import com.squareup.moshi.Moshi;
 
 import org.threeten.bp.ZonedDateTime;
 
-
 @AutoValue
 public abstract class Repo {
 
-
-    public abstract Long id();
+    public abstract long id();
 
     public abstract String name();
 
@@ -38,5 +36,4 @@ public abstract class Repo {
     public static JsonAdapter<Repo> jsonAdapter(Moshi moshi) {
         return new AutoValue_Repo.MoshiJsonAdapter(moshi);
     }
-
 }

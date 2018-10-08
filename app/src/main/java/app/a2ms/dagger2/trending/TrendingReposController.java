@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Objects;
-
 import javax.inject.Inject;
 
 import app.a2ms.dagger2.R;
@@ -47,7 +45,7 @@ public class TrendingReposController extends BaseController {
                 }),
                 viewModel.repos()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(((RepoAdapter) Objects.requireNonNull(repoList.getAdapter()))::setData),
+                        .subscribe(((RepoAdapter) repoList.getAdapter())::setData),
                 viewModel.error()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(errorRes -> {

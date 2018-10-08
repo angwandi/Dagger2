@@ -22,8 +22,6 @@ public class RepoRequester {
                 .map(TrendingReposResponse::repos);
     }
 
-    //Make separate requester for every API call for Big project
-
     Single<Repo> getRepo(String repoOwner, String repoName) {
         return service.getRepo(repoOwner, repoName);
     }

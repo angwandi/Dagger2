@@ -6,12 +6,12 @@ import java.util.List;
 
 import app.a2ms.dagger2.model.Contributor;
 
-public class ContributorDiffCallBack extends DiffUtil.Callback {
+public class ContributorDiffCallback extends DiffUtil.Callback {
 
     private final List<Contributor> oldList;
     private final List<Contributor> newList;
 
-    ContributorDiffCallBack(List<Contributor> oldList, List<Contributor> newList) {
+    ContributorDiffCallback(List<Contributor> oldList, List<Contributor> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }

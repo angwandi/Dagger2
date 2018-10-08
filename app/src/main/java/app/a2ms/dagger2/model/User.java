@@ -14,5 +14,4 @@ public abstract class User {
     public static JsonAdapter<User> jsonAdapter(Moshi moshi) {
         return new AutoValue_User.MoshiJsonAdapter(moshi);
     }
-
 }

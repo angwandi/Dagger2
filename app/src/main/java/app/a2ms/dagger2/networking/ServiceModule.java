@@ -28,8 +28,7 @@ public abstract class ServiceModule {
 
     @Provides
     @Singleton
-    static Retrofit provideRetrofit(Moshi moshi, Call.Factory callFactory,
-                                    @Named("base_url") String baseUrl) {
+    static Retrofit provideRetrofit(Moshi moshi, Call.Factory callFactory, @Named("base_url") String baseUrl) {
         return new Retrofit.Builder()
                 .callFactory(callFactory)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -37,5 +36,4 @@ public abstract class ServiceModule {
                 .baseUrl(baseUrl)
                 .build();
     }
-
 }

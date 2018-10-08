@@ -1,5 +1,6 @@
 package app.a2ms.dagger2.trending;
 
+
 import android.annotation.SuppressLint;
 
 import javax.inject.Inject;
@@ -17,26 +18,24 @@ class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
     private final ScreenNavigator screenNavigator;
 
     @Inject
-    TrendingReposPresenter(TrendingReposViewModel viewModel,
-                           RepoRepository repoRepository,
-                           ScreenNavigator screenNavigator) {
-
+    TrendingReposPresenter(
+            TrendingReposViewModel viewModel,
+            RepoRepository repoRepository,
+            ScreenNavigator screenNavigator) {
         this.viewModel = viewModel;
         this.repoRepository = repoRepository;
         this.screenNavigator = screenNavigator;
-
         loadRepos();
     }
 
     @SuppressLint("CheckResult")
     private void loadRepos() {
+        //noinspection ResultOfMethodCallIgnored
         repoRepository.getTrendingRepos()
                 .doOnSubscribe(__ -> viewModel.loadingUpdated().accept(true))
                 .doOnEvent((d, t) -> viewModel.loadingUpdated().accept(false))
                 .subscribe(viewModel.reposUpdated(), viewModel.onError());
-
     }
-
 
     @Override
     public void onRepoClicked(Repo repo) {

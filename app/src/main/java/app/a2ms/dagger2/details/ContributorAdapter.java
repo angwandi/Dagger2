@@ -49,7 +49,7 @@ class ContributorAdapter extends RecyclerView.Adapter<ContributorAdapter.Contrib
 
     void setData(List<Contributor> contributors) {
         if (contributors != null) {
-            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ContributorDiffCallBack(data, contributors));
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ContributorDiffCallback(data, contributors));
             data.clear();
             data.addAll(contributors);
             diffResult.dispatchUpdatesTo(this);

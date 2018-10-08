@@ -1,5 +1,7 @@
 package app.a2ms.dagger2.details;
 
+import android.annotation.SuppressLint;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -9,12 +11,14 @@ import app.a2ms.dagger2.di.ScreenScope;
 @ScreenScope
 class RepoDetailsPresenter {
 
+    @SuppressLint("CheckResult")
     @Inject
     RepoDetailsPresenter(
             @Named("repo_owner") String repoOwner,
             @Named("repo_name") String repoName,
             RepoRepository repoRepository,
             RepoDetailsViewModel viewModel) {
+        //noinspection ResultOfMethodCallIgnored
         repoRepository.getRepo(repoOwner, repoName)
                 .doOnSuccess(viewModel.processRepo())
                 .doOnError(viewModel.detailsError())

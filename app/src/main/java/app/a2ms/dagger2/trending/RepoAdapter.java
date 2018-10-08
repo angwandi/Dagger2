@@ -96,4 +96,3 @@ class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoViewHolder> {
         }
     }
 }
-

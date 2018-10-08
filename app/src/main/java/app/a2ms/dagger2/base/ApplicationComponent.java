@@ -14,5 +14,6 @@ import dagger.Component;
         RepoServiceModule.class,
 })
 public interface ApplicationComponent {
+
     void inject(MyApplication myApplication);
 }

@@ -10,5 +10,6 @@ import dagger.MapKey;
 @MapKey
 @Target(ElementType.METHOD)
 public @interface ControllerKey {
+
     Class<? extends Controller> value();
 }

@@ -49,7 +49,7 @@ public class RepoDetailsPresenterTest {
 
         when(viewModel.processRepo()).thenReturn(repoConsumer);
         when(viewModel.processContributors()).thenReturn(contributorConsumer);
-        when(viewModel.detaislError()).thenReturn(detailErrorConsumer);
+        when(viewModel.detailsError()).thenReturn(detailErrorConsumer);
         when(viewModel.contributorsError()).thenReturn(contributorsErrorConsumer);
 
         when(repoRepository.getRepo(OWNER, NAME)).thenReturn(Single.just(repo));

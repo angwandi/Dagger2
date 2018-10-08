@@ -17,7 +17,7 @@ class RepoDetailsPresenter {
             RepoDetailsViewModel viewModel) {
         repoRepository.getRepo(repoOwner, repoName)
                 .doOnSuccess(viewModel.processRepo())
-                .doOnError(viewModel.detaislError())
+                .doOnError(viewModel.detailsError())
                 .flatMap(repo -> repoRepository.getContributors(repo.contributorsUrl())
                         .doOnError(viewModel.contributorsError()))
                 .subscribe(viewModel.processContributors(), throwable -> {

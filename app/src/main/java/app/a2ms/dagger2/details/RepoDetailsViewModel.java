@@ -35,7 +35,7 @@ class RepoDetailsViewModel {
         return detailStateRelay;
     }
 
-    Observable<ContributorState> contributor() {
+    Observable<ContributorState> contributors() {
         return contributorStateRelay;
     }
 
@@ -59,7 +59,7 @@ class RepoDetailsViewModel {
                         .build());
     }
 
-    Consumer<Throwable> detaislError() {
+    Consumer<Throwable> detailsError() {
         return throwable -> {
             Timber.e(throwable, "Error loading repo details");
             detailStateRelay.accept(

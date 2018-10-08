@@ -45,7 +45,7 @@ public class RepoDetailsViewModelTest {
 
     @Test
     public void detaislError() throws Exception {
-        viewModel.detaislError().accept(new IOException());
+        viewModel.detailsError().accept(new IOException());
 
         viewModel.details().test().assertValue(
                 RepoDetailState.builder()
@@ -60,7 +60,7 @@ public class RepoDetailsViewModelTest {
     public void contributor() throws Exception {
         viewModel.processContributors().accept(contributors);
 
-        viewModel.contributor().test().assertValue(
+        viewModel.contributors().test().assertValue(
                 ContributorState.builder()
                         .loading(false)
                         .contributors(contributors)
@@ -73,7 +73,7 @@ public class RepoDetailsViewModelTest {
     public void contributorsError() throws Exception {
         viewModel.contributorsError().accept(new IOException());
 
-        viewModel.contributor().test().assertValue(
+        viewModel.contributors().test().assertValue(
                 ContributorState.builder()
                         .loading(false)
                         .errorRes(R.string.api_error_contributors)

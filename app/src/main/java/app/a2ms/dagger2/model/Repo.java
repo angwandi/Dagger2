@@ -11,9 +11,6 @@ import org.threeten.bp.ZonedDateTime;
 @AutoValue
 public abstract class Repo {
 
-    public static JsonAdapter<Repo> jsonAdapter(Moshi moshi) {
-        return new AutoValue_Repo.MoshiJsonAdapter(moshi);
-    }
 
     public abstract Long id();
 
@@ -37,5 +34,9 @@ public abstract class Repo {
 
     @Json(name = "updated_at")
     public abstract ZonedDateTime updatedDate();
+
+    public static JsonAdapter<Repo> jsonAdapter(Moshi moshi) {
+        return new AutoValue_Repo.MoshiJsonAdapter(moshi);
+    }
 
 }

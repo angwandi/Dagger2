@@ -1,6 +1,5 @@
 package app.a2ms.dagger2.details;
 
-import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import app.a2ms.dagger2.model.Contributor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class ContributorAdapter extends RecyclerView.Adapter<ContributorAdapter.contributorViewHolder> {
+class ContributorAdapter extends RecyclerView.Adapter<ContributorAdapter.ContributorViewHolder> {
 
     private final List<Contributor> data = new ArrayList<>();
 
@@ -27,17 +26,14 @@ class ContributorAdapter extends RecyclerView.Adapter<ContributorAdapter.contrib
         setHasStableIds(true);
     }
 
-    @NonNull
     @Override
-    public contributorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.view_user_list_item, parent, false);
-
-        return new contributorViewHolder(itemView);
+    public ContributorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user_list_item, parent, false);
+        return new ContributorViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull contributorViewHolder holder, int position) {
+    public void onBindViewHolder(ContributorViewHolder holder, int position) {
         holder.bind(data.get(position));
     }
 
@@ -61,17 +57,16 @@ class ContributorAdapter extends RecyclerView.Adapter<ContributorAdapter.contrib
             data.clear();
             notifyDataSetChanged();
         }
-
     }
 
-    static final class contributorViewHolder extends RecyclerView.ViewHolder {
+    static final class ContributorViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_user_name)
         TextView usernameText;
         @BindView(R.id.iv_avatar)
         ImageView avatarImageView;
 
-        public contributorViewHolder(@NonNull View itemView) {
+        ContributorViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

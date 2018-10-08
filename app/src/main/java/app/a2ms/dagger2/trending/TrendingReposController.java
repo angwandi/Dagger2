@@ -36,7 +36,7 @@ public class TrendingReposController extends BaseController {
     }
 
     @Override
-    protected Disposable[] subscription() {
+    protected Disposable[] subscriptions() {
         return new Disposable[]{
                 viewModel.loading()
                         .observeOn(AndroidSchedulers.mainThread())

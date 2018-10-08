@@ -11,10 +11,6 @@ import app.a2ms.dagger2.model.Contributor;
 @AutoValue
 abstract class ContributorState {
 
-    static Builder builder() {
-        return new AutoValue_ContributorState.Builder();
-    }
-
     abstract boolean loading();
 
     @Nullable
@@ -27,8 +23,13 @@ abstract class ContributorState {
         return errorRes() == null;
     }
 
+    static Builder builder() {
+        return new AutoValue_ContributorState.Builder();
+    }
+
     @AutoValue.Builder
     abstract static class Builder {
+
         abstract Builder loading(boolean loading);
 
         abstract Builder contributors(List<Contributor> contributors);

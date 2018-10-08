@@ -23,14 +23,14 @@ import app.a2ms.dagger2.ui.ScreenNavigator;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private static String INSTANCE_ID_KEY = "instance_id";
+    private static final String INSTANCE_ID_KEY = "instance_id";
+
     @Inject
     ScreenInjector screenInjector;
     @Inject
     ScreenNavigator screenNavigator;
 
     private String instanceId;
-
     private Router router;
 
     @Override
@@ -40,29 +40,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             instanceId = UUID.randomUUID().toString();
         }
-        setContentView(layoutRes());
-
-        ViewGroup screenContainer = findViewById(R.id.scree_container);
-        if (screenContainer == null) {
-            throw new IllegalArgumentException("Activity must have a view with id : screen_container");
-        }
-
         Injector.inject(this);
         super.onCreate(savedInstanceState);
+
+        setContentView(layoutRes());
+        ViewGroup screenContainer = findViewById(R.id.scree_container);
+        if (screenContainer == null) {
+            throw new NullPointerException("Activity must have a view with id: screen_container");
+        }
 
         router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
         screenNavigator.initWithRouter(router, initialScreen());
         monitorBackStack();
     }
 
-
-    @LayoutRes
-    protected abstract int layoutRes();
-
-    protected abstract Controller initialScreen();
-
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INSTANCE_ID_KEY, instanceId);
     }
@@ -73,6 +66,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    @LayoutRes
+    protected abstract int layoutRes();
+
+    protected abstract Controller initialScreen();
 
     public String getInstanceId() {
         return instanceId;

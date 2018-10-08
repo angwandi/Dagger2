@@ -10,6 +10,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface RepoService {
+
     @GET("search/repositories?q=language:java&order=desc&sort=stars")
     Single<TrendingReposResponse> getTrendingRepos();
 

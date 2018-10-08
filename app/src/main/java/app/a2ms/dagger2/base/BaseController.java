@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class BaseController extends Controller {
 
-    private final CompositeDisposable disposable = new CompositeDisposable();
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     private boolean injected = false;
     private Unbinder unbinder;
@@ -33,9 +33,8 @@ public abstract class BaseController extends Controller {
 
     @Override
     protected void onContextAvailable(@NonNull Context context) {
-        // Controller instances are retained across config changes, so this method
-        // can be called more than once. This makes sure we don't waste time injecting
-        // more than once, though technically it would not change functionality.
+        // Controller instances are retained across config changes, so this method can be called more than once. This makes
+        // sure we don't waste any time injecting more than once, though technically it wouldn't change functionality.
         if (!injected) {
             Injector.inject(this);
             injected = true;
@@ -49,13 +48,13 @@ public abstract class BaseController extends Controller {
         View view = inflater.inflate(layoutRes(), container, false);
         unbinder = ButterKnife.bind(this, view);
         onViewBound(view);
-        disposable.addAll(subscription());
+        disposables.addAll(subscriptions());
         return view;
     }
 
     @Override
     protected void onDestroyView(@NonNull View view) {
-        disposable.clear();
+        disposables.clear();
         if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;
@@ -63,9 +62,10 @@ public abstract class BaseController extends Controller {
     }
 
     protected void onViewBound(View view) {
+
     }
 
-    protected Disposable[] subscription() {
+    protected Disposable[] subscriptions() {
         return new Disposable[0];
     }
 

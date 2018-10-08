@@ -7,10 +7,6 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 abstract class RepoDetailState {
 
-    static Builder builder() {
-        return new AutoValue_RepoDetailState.Builder();
-    }
-
     abstract boolean loading();
 
     @Nullable
@@ -30,6 +26,10 @@ abstract class RepoDetailState {
 
     boolean isSuccess() {
         return errorRes() == null;
+    }
+
+    static Builder builder() {
+        return new AutoValue_RepoDetailState.Builder();
     }
 
     @AutoValue.Builder

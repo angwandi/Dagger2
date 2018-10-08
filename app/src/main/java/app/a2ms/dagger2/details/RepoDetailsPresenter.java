@@ -21,7 +21,7 @@ class RepoDetailsPresenter {
                 .flatMap(repo -> repoRepository.getContributors(repo.contributorsUrl())
                         .doOnError(viewModel.contributorsError()))
                 .subscribe(viewModel.processContributors(), throwable -> {
-                    //we handle logging in the view model
+                    // We handle logging in the view model
                 });
     }
 }

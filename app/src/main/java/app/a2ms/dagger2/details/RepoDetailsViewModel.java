@@ -19,8 +19,7 @@ import timber.log.Timber;
 @ScreenScope
 class RepoDetailsViewModel {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER =
-            DateTimeFormatter.ofPattern("MM dd, yyy");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
     private final BehaviorRelay<RepoDetailState> detailStateRelay = BehaviorRelay.create();
     private final BehaviorRelay<ContributorState> contributorStateRelay = BehaviorRelay.create();
@@ -45,8 +44,8 @@ class RepoDetailsViewModel {
                         .loading(false)
                         .name(repo.name())
                         .description(repo.description())
-                        .createdDate(repo.createdDate().format(DATE_TIME_FORMATTER))
-                        .createdDate(repo.updatedDate().format(DATE_TIME_FORMATTER))
+                        .createdDate(repo.createdDate().format(DATE_FORMATTER))
+                        .updatedDate(repo.updatedDate().format(DATE_FORMATTER))
                         .build()
         );
     }
@@ -69,7 +68,6 @@ class RepoDetailsViewModel {
                             .build()
             );
         };
-
     }
 
     Consumer<Throwable> contributorsError() {
@@ -79,10 +77,7 @@ class RepoDetailsViewModel {
                     ContributorState.builder()
                             .loading(false)
                             .errorRes(R.string.api_error_contributors)
-                            .build()
-            );
+                            .build());
         };
-
     }
 }
-

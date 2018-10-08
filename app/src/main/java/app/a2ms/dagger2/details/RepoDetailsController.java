@@ -21,9 +21,7 @@ public class RepoDetailsController extends BaseController {
     static final String REPO_NAME_KEY = "repo_name";
     static final String REPO_OWNER_KEY = "repo_owner";
 
-
     public static Controller newInstance(String repoName, String repoOwner) {
-
         Bundle bundle = new Bundle();
         bundle.putString(REPO_NAME_KEY, repoName);
         bundle.putString(REPO_OWNER_KEY, repoOwner);
@@ -40,7 +38,7 @@ public class RepoDetailsController extends BaseController {
     @BindView(R.id.tv_repo_description)
     TextView repoDescriptionText;
     @BindView(R.id.tv_creation_date)
-    TextView creationDateText;
+    TextView createdDateText;
     @BindView(R.id.tv_updated_date)
     TextView updatedDateText;
     @BindView(R.id.contributor_list)
@@ -48,14 +46,13 @@ public class RepoDetailsController extends BaseController {
     @BindView(R.id.loading_indicator)
     View detailsLoadingView;
     @BindView(R.id.contributor_loading_indicator)
-    View contributorLoadingView;
+    View contributorsLoadingView;
     @BindView(R.id.content)
     View contentContainer;
     @BindView(R.id.tv_error)
     TextView errorText;
     @BindView(R.id.tv_contributors_error)
-    TextView contributorErrorText;
-
+    TextView contributorsErrorText;
 
     public RepoDetailsController(Bundle bundle) {
         super(bundle);
@@ -68,7 +65,7 @@ public class RepoDetailsController extends BaseController {
     }
 
     @Override
-    protected Disposable[] subscription() {
+    protected Disposable[] subscriptions() {
         return new Disposable[]{
                 viewModel.details()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -90,31 +87,30 @@ public class RepoDetailsController extends BaseController {
                         errorText.setVisibility(details.isSuccess() ? View.GONE : View.VISIBLE);
                         repoNameText.setText(details.name());
                         repoDescriptionText.setText(details.description());
-                        creationDateText.setText(details.createdDate());
+                        createdDateText.setText(details.createdDate());
                         updatedDateText.setText(details.updatedDate());
                     }
                 }),
                 viewModel.contributors()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(contributorDetails -> {
-                    if (contributorDetails.loading()) {
-                        contributorLoadingView.setVisibility(View.VISIBLE);
+                        .subscribe(contributorsDetails -> {
+                    if (contributorsDetails.loading()) {
+                        contributorsLoadingView.setVisibility(View.VISIBLE);
                         contributorList.setVisibility(View.GONE);
-                        contributorErrorText.setVisibility(View.GONE);
-                        contributorErrorText.setText(null);
+                        contributorsErrorText.setVisibility(View.GONE);
+                        contributorsErrorText.setText(null);
                     } else {
-                        contributorLoadingView.setVisibility(View.VISIBLE);
-                        contributorList.setVisibility(contributorDetails.isSuccess() ? View.VISIBLE : View.GONE);
-                        contributorErrorText.setVisibility(contributorDetails.isSuccess() ? View.GONE : View.VISIBLE);
-                        if (contributorDetails.isSuccess()) {
-                            contributorErrorText.setText(null);
-                            ((ContributorAdapter) contributorList.getAdapter()).setData(contributorDetails.contributors());
+                        contributorsLoadingView.setVisibility(View.GONE);
+                        contributorList.setVisibility(contributorsDetails.isSuccess() ? View.VISIBLE : View.GONE);
+                        contributorsErrorText.setVisibility(contributorsDetails.isSuccess() ? View.GONE : View.VISIBLE);
+                        if (contributorsDetails.isSuccess()) {
+                            contributorsErrorText.setText(null);
+                            ((ContributorAdapter) contributorList.getAdapter()).setData(contributorsDetails.contributors());
                         } else {
                             //noinspection ConstantConditions
-                            contributorErrorText.setText(contributorDetails.errorRes());
+                            contributorsErrorText.setText(contributorsDetails.errorRes());
                         }
                     }
-
                 })
         };
     }

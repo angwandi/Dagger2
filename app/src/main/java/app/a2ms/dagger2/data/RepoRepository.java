@@ -20,9 +20,9 @@ import io.reactivex.Single;
 public class RepoRepository {
 
     private final Provider<RepoRequester> repoRequesterProvider;
+    private final Scheduler scheduler;
     private final List<Repo> cachedTrendingRepos = new ArrayList<>();
     private final Map<String, List<Contributor>> cachedContributors = new HashMap<>();
-    private final Scheduler scheduler;
 
     @Inject
     RepoRepository(
@@ -48,7 +48,6 @@ public class RepoRepository {
         return Maybe.concat(cachedContributors(url), apiContributors(url))
                 .firstOrError()
                 .subscribeOn(scheduler);
-
     }
 
     private Maybe<List<Contributor>> cachedContributors(String url) {
